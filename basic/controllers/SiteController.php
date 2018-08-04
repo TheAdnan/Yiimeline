@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use yii\helpers\VarDumper;
 
 class SiteController extends Controller
 {
@@ -61,7 +62,57 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+
+           if (isset($_POST['submit']) )
+           {
+              $keyword = $_POST['keyword'];
+
+              if (empty($keyword))
+              {
+                  $response = array(
+                        "type" => "error",
+                        "message" => "Please enter the keyword."
+                      );
+              } else
+              {
+                $apikey = 'AIzaSyB72OI8GKAXbwbgL7AtMjq7rOWpdMGfq6A';
+                $googleApiUrl = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=' . $keyword . '&maxResults=15&key=' . $apikey;
+
+                $ch = curl_init();
+
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_URL, $googleApiUrl);
+                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+                curl_setopt($ch, CURLOPT_VERBOSE, 0);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                $response = curl_exec($ch);
+
+                curl_close($ch);
+                $data = json_decode($response);
+                $value = json_decode(json_encode($data), true);
+
+                $results = array();
+//VarDumper::dump($value['items'][0]); die;
+            for ($i = 0; $i < 15; $i++) {
+
+                $results[$i]['videoId'] = $value['items'][$i]['id']['videoId'];
+                $results[$i]['title'] = $value['items'][$i]['snippet']['title'];
+                $results[$i]['description'] = $value['items'][$i]['snippet']['description'];
+                }
+            }
+
+            return $this->render('search', array('video' => $results));
+
+          }
+          else{
+            return $this->render('index');
+          }
+    }
+
+
+    public function actionSearch(){
+      return $this->render('search');
     }
 
     /**
