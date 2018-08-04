@@ -1,53 +1,124 @@
-<?php
 
-/* @var $this yii\web\View */
+<head>
 
-$this->title = 'My Yii Application';
-?>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <style>
+
+        body {
+            font-family: Arial;
+            width: 900px;
+            padding: 10px;
+        }
+        .search-form-container {
+            background: #F0F0F0;
+            border: #e0dfdf 1px solid;
+            padding: 20px;
+            border-radius: 2px;
+        }
+        .input-row {
+            margin-bottom: 20px;
+        }
+        .input-field {
+            width: 100%;
+            border-radius: 2px;
+            padding: 10px;
+            border: #e0dfdf 1px solid;
+        }
+        .btn-submit {
+            padding: 10px 20px;
+            background: #333;
+            border: #1d1d1d 1px solid;
+            color: #f0f0f0;
+            font-size: 0.9em;
+            width: 100px;
+            border-radius: 2px;
+            cursor:pointer;
+        }
+        .videos-data-container {
+            background: #F0F0F0;
+            border: #e0dfdf 1px solid;
+            padding: 20px;
+            border-radius: 2px;
+        }
+
+        .response {
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 2px;
+        }
+
+        .error {
+             background: #fdcdcd;
+             border: #ecc0c1 1px solid;
+        }
+
+       .success {
+            background: #c5f3c3;
+            border: #bbe6ba 1px solid;
+        }
+        .result-heading {
+            margin: 20px 0px;
+            padding: 20px 10px 5px 0px;
+            border-bottom: #e0dfdf 1px solid;
+        }
+        iframe {
+            border: 0px;
+        }
+        .video-tile {
+            display: inline-block;
+            margin: 10px 10px 20px 10px;
+        }
+
+        .videoDiv {
+            width: 250px;
+            height: 150px;
+            display: inline-block;
+        }
+        .videoTitle {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .videoDesc {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .videoInfo {
+            width: 250px;
+        }
+    </style>
+
+</head>
+
+      <body>
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
+        <h1>YouTube API PHP!</h1>
+        <!--Api key: "AIzaSyB72OI8GKAXbwbgL7AtMjq7rOWpdMGfq6A"
+             OauthClient ID: ""     -->
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+        <p class="lead">This is my first take on Youtube API with PHP Yii-powered application.</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
+                <h2>Search Videos by keyword using YouTube Data API V3</h2>
+                <div class="search-form-container">
+                    <form id="keywordForm" method="post">
+                        <div class="input-row">
+                            Search Keyword : <input class="input-field" type="search" id="keyword" name="keyword"  placeholder="Enter Search Keyword">
+                        </div>
+                        <input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
+                        <input class="btn-submit"  type="submit" name="submit" value="Search">
+                    </form>
+                </div>
 
-    <div class="body-content">
 
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                    <div class="videos-data-container" id="SearchResultsDiv">
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+                </div>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
-
-    </div>
-</div>
+          </body>
