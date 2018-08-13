@@ -1,4 +1,7 @@
 <?php
+// this line prevents errors, it's about session start/close/restore....
+ini_set('session.save_path',realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../session'));
+session_start();
 
 // comment out the following two lines when deployed to production
 defined('YII_DEBUG') or define('YII_DEBUG', true);

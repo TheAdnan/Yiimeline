@@ -66,6 +66,8 @@ class SiteController extends Controller
            if (isset($_POST['submit']) )
            {
               $keyword = $_POST['keyword'];
+              $keyword = preg_replace('/\s+/', '', $keyword);
+
 
               if (empty($keyword))
               {
@@ -75,6 +77,7 @@ class SiteController extends Controller
                       );
               } else
               {
+            
                 $apikey = 'AIzaSyB72OI8GKAXbwbgL7AtMjq7rOWpdMGfq6A';
                 $googleApiUrl = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=' . $keyword . '&maxResults=15&key=' . $apikey;
 
